@@ -8,43 +8,43 @@ import imutils
 import cv2
 
 GPIO.setmode(GPIO.BOARD)             # choose BCM or BOARD
-GPIO.setup(21, GPIO.OUT)
-GPIO.setup(15, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)            # set GPIO24 as an output
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)            # set GPIO24 as an output
 GPIO.setwarnings(False)
 
 def lft(t):
-    GPIO.output(13 ,1)
-    GPIO.output(21, 1)
+    GPIO.output(27 ,1)
+    GPIO.output(18, 1)
     sleep(t)
-    GPIO.output(21, 0)
-    GPIO.output(13, 0)
+    GPIO.output(18, 0)
+    GPIO.output(27, 0)
 
 def rght(t):
-    GPIO.output(15, 1)
     GPIO.output(23, 1)
+    GPIO.output(17, 1)
     sleep(t)
+    GPIO.output(17, 0)
     GPIO.output(23, 0)
-    GPIO.output(15, 0)
 
 def fwrd(t):
-    GPIO.output(21, 1)
-    GPIO.output(23, 1)
+    GPIO.output(18, 1)
+    GPIO.output(17, 1)
     sleep(t)
-    GPIO.output(21, 0)
-    GPIO.output(23, 0)
+    GPIO.output(18, 0)
+    GPIO.output(17, 0)
 
 def bkwrd(t):
-    GPIO.output(13 ,0)
-    GPIO.output(15, 0)
+    GPIO.output(27 ,0)
+    GPIO.output(23, 0)
     sleep(t)
-    GPIO.output(13, 0)
-    GPIO.output(15, 0)
+    GPIO.output(27, 0)
+    GPIO.output(23, 0)
 ball_found = False
 camera = 0
 def find_ball(ball_found):
-	greenLower = (0,84,150)
+	greenLower = (0,84,230)
 	greenUpper = (31, 255, 255)
 	camera = cv2.VideoCapture(0)
 	while (ball_found == False):
@@ -82,7 +82,7 @@ def turn_to_ball(x,y,r):
     elif( x > 450 ):
         rght(0.04)
 	print("mega right")
-    elif( x < 150 ):
+    elif( x < 230 ):
         lft(0.08)
 	print("mega left")
     else:
@@ -91,13 +91,13 @@ def turn_to_ball(x,y,r):
     goto_ball(y,r)
 
 def goto_ball(y,g):
-    if(g < 40 and g > 15):
+    if(g < 40 and g > 23):
         fwrd(0.5)
     elif(g > 31 and g < 25):
 	fwrd(0.5)
     elif(g > 25 and g < 19):
         fwrd(0.5)
-    elif(g < 15):
+    elif(g < 23):
 	fwrd(0.5)
     elif(g > 40):
 	fwrd(1)
@@ -107,7 +107,7 @@ def goto_ball(y,g):
     print(g)
 
 def find_goal(goal_found,ball_found):
-	goal_lower = (135,30,150)
+	goal_lower = (275,30,230)
 	goal_upper = (185,245,245)
 	time.sleep(0.05)
 #	camera = cv2.VideoCapture(0)
@@ -145,7 +145,7 @@ def turn_to_goal(x,y,r):
     elif( x > 450 ):
         rght(0.07)
         print("mega right")
-    elif( x < 150 ):
+    elif( x < 230 ):
         lft(0.07)
         print("mega left")
     else:
@@ -171,5 +171,3 @@ def man():
 		find_ball(ball_found)
 
 man()
-
-
