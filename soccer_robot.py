@@ -10,36 +10,36 @@ import cv2
 GPIO.setmode(GPIO.BOARD)             # choose BCM or BOARD
 GPIO.setup(18, GPIO.OUT)
 GPIO.setup(23, GPIO.OUT)
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(27, GPIO.OUT)            # set GPIO24 as an output
+GPIO.setup(2, GPIO.OUT)
+GPIO.setup(3, GPIO.OUT)            # set GPIO24 as an output
 GPIO.setwarnings(False)
 
 def lft(t):
-    GPIO.output(27 ,1)
+    GPIO.output(3 ,1)
     GPIO.output(18, 1)
     sleep(t)
     GPIO.output(18, 0)
-    GPIO.output(27, 0)
+    GPIO.output(3, 0)
 
 def rght(t):
     GPIO.output(23, 1)
-    GPIO.output(17, 1)
+    GPIO.output(2, 1)
     sleep(t)
-    GPIO.output(17, 0)
+    GPIO.output(2, 0)
     GPIO.output(23, 0)
 
 def fwrd(t):
     GPIO.output(18, 1)
-    GPIO.output(17, 1)
+    GPIO.output(2, 1)
     sleep(t)
     GPIO.output(18, 0)
-    GPIO.output(17, 0)
+    GPIO.output(2, 0)
 
 def bkwrd(t):
-    GPIO.output(27 ,0)
+    GPIO.output(3 ,0)
     GPIO.output(23, 0)
     sleep(t)
-    GPIO.output(27, 0)
+    GPIO.output(3, 0)
     GPIO.output(23, 0)
 ball_found = False
 camera = 0
@@ -107,7 +107,7 @@ def goto_ball(y,g):
     print(g)
 
 def find_goal(goal_found,ball_found):
-	goal_lower = (275,30,230)
+	goal_lower = (35,30,230)
 	goal_upper = (185,245,245)
 	time.sleep(0.05)
 #	camera = cv2.VideoCapture(0)
