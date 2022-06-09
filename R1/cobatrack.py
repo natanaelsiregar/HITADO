@@ -93,6 +93,82 @@ def putar():
     pwm_3a.ChangeDutyCycle(0)
     pwm_3b.ChangeDutyCycle(10)
     
+def start():
+    pwm_1a.ChangeDutyCycle(10)
+    pwm_1b.ChangeDutyCycle(0)
+    pwm_2a.ChangeDutyCycle(10)
+    pwm_2b.ChangeDutyCycle(0)
+    pwm_3a.ChangeDutyCycle(0)
+    pwm_3b.ChangeDutyCycle(10)
+
+LPWM = 20
+RPWM = 21
+
+GPIO.setup(LPWM, GPIO.OUT)
+GPIO.setup(RPWM, GPIO.OUT)
+
+L = GPIO.PWM(LPWM, 100)
+R = GPIO.PWM(RPWM, 100)
+
+L.start(0)
+R.start(0)
+
+def aktif():
+    
+    L.ChangeDutyCycle(0)
+    R.ChangeDutyCycle(10)
+
+def pasif():
+    L.ChangeDutyCycle(90)
+    R.ChangeDutyCycle(0)
+
+def stop():
+    L.ChangeDutyCycle(0)
+    R.ChangeDutyCycle(0)
+
+def penendang():
+    time.sleep(0.5)
+    pasif()
+    time.sleep(0.35)
+    aktif()
+    time.sleep(3)
+    stop()
+    time.sleep(0.01)
+
+#Penggiring
+Ena, In1, In2 = 13, 19, 26
+Enb, In3, In4 = 5, 6, 12
+
+GPIO.setup(Ena, GPIO.OUT)
+GPIO.setup(In1, GPIO.OUT)
+GPIO.setup(In2, GPIO.OUT)
+
+GPIO.setup(Enb, GPIO.OUT)
+GPIO.setup(In3, GPIO.OUT)
+GPIO.setup(In4, GPIO.OUT)
+
+pwm1 = GPIO.PWM(Ena, 100)
+pwm2 = GPIO.PWM(Enb, 100)
+
+pwm1.start(0)
+pwm2.start(0)
+
+def penggiring():
+	GPIO.output(In1, GPIO.LOW)
+	GPIO.output(In2, GPIO.HIGH)
+
+	GPIO.output(In3, GPIO.HIGH)
+	GPIO.output(In4, GPIO.LOW)
+	pwm1.ChangeDutyCycle(30)
+	pwm2.ChangeDutyCycle(30)
+
+def stop_penggiring():
+	GPIO.output(In1, GPIO.LOW)
+	GPIO.output(In2, GPIO.LOW)
+
+	GPIO.output(In3, GPIO.LOW)
+	GPIO.output(In4, GPIO.LOW)
+
 # keep looping
 while True:
     # grab the current frame

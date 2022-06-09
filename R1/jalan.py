@@ -35,14 +35,12 @@ pwm_2b.start(dc)
 pwm_3a.start(dc)
 pwm_3b.start(dc)
 
-pwm_1a.ChangeDutyCycle(10)
+pwm_1a.ChangeDutyCycle(30)
 pwm_1b.ChangeDutyCycle(0)
 pwm_2a.ChangeDutyCycle(0)
-pwm_2b.ChangeDutyCycle(0)
-pwm_3a.ChangeDutyCycle(10)
+pwm_2b.ChangeDutyCycle(30)
+pwm_3a.ChangeDutyCycle(0)
 pwm_3b.ChangeDutyCycle(0)
 
 # camera.release()
 # cv2.destroyAllWindows()
-
-

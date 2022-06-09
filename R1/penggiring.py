@@ -33,8 +33,8 @@ def penggiring():
 	GPIO.output(In1, GPIO.LOW)
 	GPIO.output(In2, GPIO.HIGH)
 
-	GPIO.output(In3, GPIO.LOW)
-	GPIO.output(In4, GPIO.HIGH)
+	GPIO.output(In3, GPIO.HIGH)
+	GPIO.output(In4, GPIO.LOW)
 	pwm1.ChangeDutyCycle(30)
 	pwm2.ChangeDutyCycle(30)
 
@@ -45,5 +45,6 @@ def stop_penggiring():
 	GPIO.output(In3, GPIO.LOW)
 	GPIO.output(In4, GPIO.LOW)
 	
+#stop_penggiring()
 penggiring()
-penendang()
+#penendang()
